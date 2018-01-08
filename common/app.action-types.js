@@ -1,0 +1,1 @@
+export const INCREASE_CLICKS = 'app/INCREASE_CLICKS';

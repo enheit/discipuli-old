@@ -4,7 +4,10 @@
   "description": "The application to manage flow between teachers \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cworkflow \u001b[3~between teachers and users",
   "main": "index.js",
   "scripts": {
-    "server": "node ./server/server.js"
+    "browser.dev": "webpack --env.NODE_ENV=browser",
+    "browser.prod": "webpack --env.NODE_ENV=browser --env.production",
+    "server.dev": "babel-node ./server/server.js",
+    "server.pod": "webpack --env.NODE_ENV=server --env.production"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,21 @@
   },
   "homepage": "https://github.com/enheit/discipuli#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
   }
 }
