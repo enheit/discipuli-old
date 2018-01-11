@@ -1,27 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { increaseClicks } from './app.actions';
+// TODO: Remove the hot import from production build
+import { hot } from 'react-hot-loader';
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <p>Clicker counter: {this.props.clickNumbers}</p>
-        <button onClick={this.props.increaseClicks}>Increase</button>
-      </div>
-    )
+    return <div>Hello world</div>;
   }
 }
 
-const mapStateToProps = state => ({
-  clickNumbers: state.clickNumbers
-});
-
-const mapDispatchToProps = dispatch => ({
-  increaseClicks() {
-    dispatch(increaseClicks())
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// TODO: Remove hot HOC from the production build by using process.env.NODE_ENV
+export default hot(module)(App);

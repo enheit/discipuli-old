@@ -1,5 +1,12 @@
-const commonConfig = {
-  entry: './client/client.js',
+const browserCommonConfig = {
+  name: 'client',
+  entry: process.env.NODE_ENV === 'production'
+  ? './client/client.js'
+  : [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    './client/client.js',
+  ],
   resolve: {
     extensions: [".js", ".jsx"]
   },
@@ -19,4 +26,4 @@ const commonConfig = {
   }
 };
 
-export default commonConfig;
+export default browserCommonConfig;

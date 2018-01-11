@@ -3,7 +3,8 @@ import { hydrate } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import { App, reducer } from '../common';
+import configureStore from './configure-reducer';
+import App from '../common/app';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
@@ -12,7 +13,7 @@ const preloadedState = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 // Create Redux store with initial state
-const store = createStore(reducer, preloadedState);
+const store = configureStore(preloadedState);
 
 hydrate(
   <Provider store={store}>

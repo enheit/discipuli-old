@@ -1,16 +1,7 @@
 import { handleActions } from 'redux-actions';
 
-import * as actionTypes from './app.action-types'
+const defaultState = {};
 
-const defaultState = {
-  clickNumbers: 0
-};
-
-const reducer = handleActions({
-  [actionTypes.INCREASE_CLICKS]: state => ({
-    ...state,
-    clickNumbers: state.clickNumbers + 1,
-  })
-}, defaultState);
+const reducer = handleActions({}, defaultState);
 
 export default reducer;

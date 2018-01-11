@@ -6,8 +6,8 @@
   "scripts": {
     "browser.dev": "webpack --env.NODE_ENV=browser",
     "browser.prod": "webpack --env.NODE_ENV=browser --env.production",
-    "server.dev": "babel-node ./server/server.js",
-    "server.pod": "webpack --env.NODE_ENV=server --env.production"
+    "server.dev": "webpack --env.NODE_ENV=server",
+    "server.prod": "webpack --env.NODE_ENV=server --env.production"
   },
   "repository": {
     "type": "git",
@@ -39,8 +39,13 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "html-loader": "^0.5.4",
+    "react-hot-loader": "^4.0.0-beta.13",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
-    "webpack-merge": "^4.1.1"
+    "webpack-dev-middleware": "^2.0.4",
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-merge": "^4.1.1",
+    "webpack-node-externals": "^1.6.0"
   }
 }
