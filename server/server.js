@@ -1,50 +1,36 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
-import path from 'path';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+/**
+ * TODO: Figure out how to import following dependencies in dev build only,
+ * without breaking eslint validation
+ */
+/* eslint-disable import/no-extraneous-dependencies */
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+/* eslint-enable import/no-extraneous-dependencies */
 
+import { PORT, IS_PRODUCTION, SERVER_RUNNING_MESSAGE } from './config';
 import webpackConfig from '../webpack.config.babel';
 import App from '../common/app';
 import reducer from '../common/app.reducer';
 import renderFullPage from './renderer';
 
 const app = express();
-const PORT = 3000;
-
-const browserConfig = webpackConfig({
-  NODE_ENV: 'browser',
-  production: process.env.NODE_ENV === 'production'
-});
-const browserCompiler = webpack(browserConfig);
-
-//Serve static files
-app.use('/static', express.static('static'));
-app.use(webpackDevMiddleware(browserCompiler, {
-  publicPath: browserConfig.output.publicPath,
-  serverSideRender: true
-}));
-app.use(webpackHotMiddleware(browserCompiler));
-app.use(handleRender);
-
 
 // This is fired every time the server side receives a request
 function handleRender(req, res) {
-  const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
+  const { assetsByChunkName } = res.locals.webpackStats.toJson();
 
   // Create a new Redux store instance
   const store = createStore(reducer);
 
   // Render the component to a string
-  const html = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+  // eslint-disable-next-line react/jsx-filename-extension
+  const html = renderToString(<Provider store={store}><App /></Provider>);
 
   // Grab the initial state from our Redux store
   const preloadedState = store.getState();
@@ -53,4 +39,26 @@ function handleRender(req, res) {
   res.send(renderFullPage(html, preloadedState, assetsByChunkName));
 }
 
-app.listen(PORT, () => console.log(`\nDiscipuli server is running at http://localhost:${PORT}\n`));
+// Serve static files
+app.use('/static', express.static('static'));
+
+if (!IS_PRODUCTION) { // Is develop build
+  const buildConfig = {
+    NODE_ENV: 'browser',
+    production: IS_PRODUCTION,
+  };
+  const browserConfig = webpackConfig(buildConfig);
+  const webpackDevMiddlewareOptions = {
+    publicPath: browserConfig.output.publicPath,
+    serverSideRender: true,
+  };
+  const browserCompiler = webpack(browserConfig);
+
+  app.use(webpackDevMiddleware(browserCompiler, webpackDevMiddlewareOptions));
+  app.use(webpackHotMiddleware(browserCompiler));
+}
+
+app.use(handleRender);
+
+// eslint-disable-next-line no-console
+app.listen(PORT, () => console.log(SERVER_RUNNING_MESSAGE));

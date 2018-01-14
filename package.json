@@ -4,10 +4,18 @@
   "description": "The application to manage flow between teachers \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cworkflow \u001b[3~between teachers and users",
   "main": "index.js",
   "scripts": {
+    "dev": "npm run server.dev && node ./static/server.bundle.js",
+    "prod": "npm run browser.prod && npm run server.prod",
+    "lint": "npm run client.lint && npm run common.lint && npm run server.lint",
     "browser.dev": "webpack --env.NODE_ENV=browser",
     "browser.prod": "webpack --env.NODE_ENV=browser --env.production",
     "server.dev": "webpack --env.NODE_ENV=server",
-    "server.prod": "webpack --env.NODE_ENV=server --env.production"
+    "server.prod": "webpack --env.NODE_ENV=server --env.production",
+    "client.lint": "eslint -c ./.eslintrc.json ./client --ext .js, .jsx; exit 0",
+    "common.lint": "eslint -c ./.eslintrc.json ./common --ext .js, .jsx; exit 0",
+    "server.lint": "eslint -c ./.eslintrc.json ./server --ext .js; exit 0",
+    "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx; exit 0",
+    "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js; exit 0"
   },
   "repository": {
     "type": "git",
@@ -39,6 +47,11 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "html-loader": "^0.5.4",
     "react-hot-loader": "^4.0.0-beta.13",
     "uglifyjs-webpack-plugin": "^1.1.6",
