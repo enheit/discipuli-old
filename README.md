@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/enheit/discipuli.svg?branch=develop)](https://travis-ci.org/enheit/discipuli)
+
 # discipuli
 The application to manage workflow between teachers and students
 
