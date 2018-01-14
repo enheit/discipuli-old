@@ -17,6 +17,11 @@
     "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx",
     "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js"
   },
+  "pre-commit": [
+    "client.lint",
+    "common.lint",
+    "server.lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/enheit/discipuli.git"
@@ -53,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "html-loader": "^0.5.4",
+    "pre-commit": "^1.2.2",
     "react-hot-loader": "^4.0.0-beta.13",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
