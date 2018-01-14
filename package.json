@@ -1,7 +1,7 @@
 {
   "name": "discipuli",
   "version": "0.0.1",
-  "description": "The application to manage flow between teachers \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[Cworkflow \u001b[3~between teachers and users",
+  "description": "The application to manage flow between teachers and students",
   "main": "index.js",
   "scripts": {
     "dev": "npm run server.dev && node ./static/server.bundle.js",
