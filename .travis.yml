@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+ - "lts/*"
+cache:
+directories:
+  - "node_modules"
+install:
+  - npm install
+script:
+  - npm run client.lint
+  - npm run common.lint
+  - npm run server.lint
+  - npm run server.prod
+  - npm run browser.prod

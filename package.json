@@ -11,11 +11,11 @@
     "browser.prod": "webpack --env.NODE_ENV=browser --env.production",
     "server.dev": "webpack --env.NODE_ENV=server",
     "server.prod": "webpack --env.NODE_ENV=server --env.production",
-    "client.lint": "eslint -c ./.eslintrc.json ./client --ext .js, .jsx; exit 0",
-    "common.lint": "eslint -c ./.eslintrc.json ./common --ext .js, .jsx; exit 0",
-    "server.lint": "eslint -c ./.eslintrc.json ./server --ext .js; exit 0",
-    "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx; exit 0",
-    "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js; exit 0"
+    "client.lint": "eslint -c ./.eslintrc.json ./client --ext .js, .jsx",
+    "common.lint": "eslint -c ./.eslintrc.json ./common --ext .js, .jsx",
+    "server.lint": "eslint -c ./.eslintrc.json ./server --ext .js",
+    "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx",
+    "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js"
   },
   "repository": {
     "type": "git",
