@@ -1,0 +1,1 @@
+web: node ./static/server.bundle.min.js

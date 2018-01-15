@@ -4,6 +4,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 
 const browserProdConfig = {
+  entry: './client/client.jsx',
   output: {
     path: path.resolve(__dirname, '../../static'),
     filename: 'browser.bundle.min.js'

@@ -1,12 +1,5 @@
 const browserCommonConfig = {
   name: 'client',
-  entry: process.env.NODE_ENV === 'production'
-  ? './client/client.jsx'
-  : [
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
-    './client/client.jsx',
-  ],
   resolve: {
     extensions: [".js", ".jsx"]
   },

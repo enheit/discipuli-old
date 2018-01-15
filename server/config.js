@@ -1,5 +1,5 @@
 // Port which server listen to
-export const PORT = 3000;
+export const PORT = process.env.PORT || 3000;
 // Message that show in console after server successfully run
 export const SERVER_RUNNING_MESSAGE = `\nServer is running on port ${PORT}\n`;
 // Current build type

@@ -9,7 +9,7 @@ function attachStaticFiles(extention, file, assetsByChunkName) {
     .join('\n');
 }
 
-function renderFullPage(html, preloadedState, assetsByChunkName) {
+export function renderDevFullPage(html, preloadedState, assetsByChunkName) {
   const serializablePreloadedState = JSON
     .stringify(preloadedState)
     .replace(/</g, '\\u003c');
@@ -34,4 +34,24 @@ function renderFullPage(html, preloadedState, assetsByChunkName) {
     `;
 }
 
-export default renderFullPage;
+export function renderFullPage(html, preloadedState) {
+  const serializablePreloadedState = JSON
+    .stringify(preloadedState)
+    .replace(/</g, '\\u003c');
+
+  return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Redux Universal Example</title>
+      </head>
+      <body>
+        <div id="root">${html}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${serializablePreloadedState}
+        </script>
+        <script src="static/browser.bundle.min.js"></script>
+      </body>
+    </html>
+    `;
+}
