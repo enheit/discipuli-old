@@ -35,7 +35,7 @@ The application to manage workflow between teachers and students
 - [x] Add server webpack config
 - [x] Add [ESLint](https://eslint.org/)
 - [x] Add [Travis](https://travis-ci.org/) CI
-- [ ] Add autodeploy
+- [x] Add autodeploy to [Heroku](https://dashboard.heroku.com/)
 - [ ] Improve webpack configs
 - [ ] Start to use [JSDoc](http://usejsdoc.org/)
 - [ ] Add [Jest](https://facebook.github.io/jest/)
