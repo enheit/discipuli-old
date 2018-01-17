@@ -12,7 +12,7 @@ const defaultState = {
 
 const reducer = handleActions({
   [INCREASE_COUNTER]: state => ({
-    counter: state.counter + 1,
+    counter: state.counter + 10,
   }),
 
   [DECREASE_COUNTER]: state => ({
