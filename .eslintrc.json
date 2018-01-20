@@ -3,5 +3,8 @@
   "rules": {
     "max-len": [1, 80, 2, { "ignoreComments": true }],
     "quotes": [1, "single"]
+  },
+  "env": {
+    "jest": true
   }
 }

@@ -10,6 +10,7 @@ script:
   - npm run client.lint
   - npm run common.lint
   - npm run server.lint
+  - npm run test
   - npm run server.prod
   - npm run browser.prod
 deploy:

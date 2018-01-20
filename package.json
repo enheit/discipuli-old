@@ -20,7 +20,8 @@
     "server.lint": "eslint -c ./.eslintrc.json ./server --ext .js",
     "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx",
     "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js",
-    "heroku-postbuild": "npm run prod"
+    "heroku-postbuild": "npm run prod",
+    "test": "jest --coverage"
   },
   "pre-commit": [
     "client.lint",
@@ -63,6 +64,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "html-loader": "^0.5.4",
+    "jest": "^22.1.4",
     "pre-commit": "^1.2.2",
     "react-hot-loader": "^4.0.0-beta.13",
     "uglifyjs-webpack-plugin": "^1.1.6",
