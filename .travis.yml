@@ -10,7 +10,7 @@ script:
   - npm run client.lint
   - npm run common.lint
   - npm run server.lint
-  - npm run test
+  - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
   - npm run server.prod
   - npm run browser.prod
 deploy:
