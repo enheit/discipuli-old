@@ -4,7 +4,7 @@
 The application to manage workflow between teachers and students
 
 [![Build Status](https://travis-ci.org/enheit/discipuli.svg?branch=develop)](https://travis-ci.org/enheit/discipuli)
-[![Coverage Status](https://coveralls.io/repos/github/enheit/discipuli/badge.svg?branch=coveralls-init)](https://coveralls.io/github/enheit/discipuli?branch=coveralls-init)
+[![Coverage Status](https://coveralls.io/repos/github/enheit/discipuli/badge.svg?branch=develop)](https://coveralls.io/github/enheit/discipuli?branch=develop)
 
 ## CLI commands
 ### General (combined)
@@ -45,6 +45,7 @@ The application to manage workflow between teachers and students
 - [x] Add [Travis](https://travis-ci.org/) CI
 - [x] Add autodeploy to [Heroku](https://dashboard.heroku.com/)
 - [x] Add [Jest](https://facebook.github.io/jest/)
+- [x] Add [coveralls](https://coveralls.io/)
 - [ ] Improve webpack configs
 - [ ] Start to use [JSDoc](http://usejsdoc.org/)
 
