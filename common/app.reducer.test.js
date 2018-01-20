@@ -28,4 +28,16 @@ describe('app reducer', () => {
 
     expect(appReducer(defaultState, decreaseAction)).toEqual(expectedState);
   });
+
+  it('should handle RESET_COUNTER', () => {
+    const decreaseAction = {
+      type: actionTypes.RESET_COUNTER,
+    };
+
+    const expectedState = {
+      counter: 0,
+    };
+
+    expect(appReducer(defaultState, decreaseAction)).toEqual(expectedState);
+  });
 });
