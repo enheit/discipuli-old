@@ -9,6 +9,7 @@ import webpackConfig from '../webpack.config.babel';
 import App from '../common/app';
 import reducer from '../common/app.reducer';
 import { renderDevFullPage, renderFullPage } from './renderer';
+import postGqlMiddleware from './postgraphile';
 
 const app = express();
 
@@ -58,6 +59,8 @@ if (!IS_PRODUCTION) { // Is develop build
   app.use(webpackHotMiddleware(browserCompiler));
 }
 
+// Postgraphile middleware should goes before handleRender
+app.use(postGqlMiddleware);
 app.use(handleRender);
 
 // eslint-disable-next-line no-console

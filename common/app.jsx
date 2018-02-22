@@ -2,19 +2,42 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // TODO: Remove the hot import from production build
 import { hot } from 'react-hot-loader';
+import { graphql, QueryRenderer } from 'react-relay';
 
+import environment from '../client/relay-environment';
 import { actionCreators } from './app.reducer';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <div>Counter: {this.props.counter}</div>
-        <button onClick={this.props.increase}>Increase</button>
-        <button onClick={this.props.decrease}>Decrease</button>
-        <button onClick={this.props.reset}>Reset</button>
-      </div>
-    );
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query appQuery {
+            user: userByRowId(rowId: 1) {
+              login
+              password
+            }
+          }
+        `}
+        variables={{}}
+        render={({error, props}) => {
+          if(error) {
+            return <div>Error occures</div>;
+          }
+
+          if(!props) {
+            return <div>Loading...</div>;
+          }
+
+          return (
+            <div>
+              Login: {props.user.login}, password: {props.user.password}
+            </div>
+          )
+        }}
+      />
+    )
   }
 }
 

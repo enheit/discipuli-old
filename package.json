@@ -21,7 +21,8 @@
     "browser.lint.fix": "eslint --fix -c ./.eslintrc.json ./common --ext .js, .jsx",
     "server.lint.fix": "eslint --fix -c ./.eslintrc.json ./server --ext .js",
     "heroku-postbuild": "npm run prod",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "relay": "relay-compiler --src ./common --schema ./schema.graphql --extensions js jsx"
   },
   "pre-commit": [
     "client.lint",
@@ -46,15 +47,21 @@
   "homepage": "https://github.com/enheit/discipuli#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "graphql": "^0.12.3",
+    "isomorphic-fetch": "^2.2.1",
+    "postgraphile": "^4.0.0-alpha2.31",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
+    "react-relay": "^1.4.1",
     "redux": "^3.7.2",
-    "redux-actions": "^2.2.1"
+    "redux-actions": "^2.2.1",
+    "relay-runtime": "^1.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-relay": "^1.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -68,9 +75,11 @@
     "jest": "^22.1.4",
     "pre-commit": "^1.2.2",
     "react-hot-loader": "^4.0.0-beta.13",
+    "relay-compiler": "^1.4.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",
+    "webpack-graphql-loader": "^0.1.0",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1",
     "webpack-node-externals": "^1.6.0"

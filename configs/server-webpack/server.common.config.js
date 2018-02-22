@@ -28,7 +28,11 @@ const serverCommonConfig = {
         test: /.html$/,
         exclude: /node_modules/,
         use: 'html-loader'
-      }
+      },
+      {
+        test: /\.graphql?$/,
+        loader: 'webpack-graphql-loader'
+      },
     ]
   },
 }

@@ -14,7 +14,11 @@ const browserCommonConfig = {
          * babel-preset-react for compiling JSX and other stuff down to Javascript
          */
         use: 'babel-loader'
-      }
+      },
+      {
+        test: /\.graphql?$/,
+        loader: 'webpack-graphql-loader'
+      },
     ]
   }
 };
