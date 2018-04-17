@@ -14,25 +14,19 @@ class App extends Component {
         environment={environment}
         query={graphql`
           query appQuery {
-            user: userByRowId(rowId: 1) {
-              login
-              password
+            personByRowId(rowId: 10) {
+              id,
+              rowId,
+              firstName,
+              lastName
             }
           }
         `}
         variables={{}}
         render={({error, props}) => {
-          if(error) {
-            return <div>Error occures</div>;
-          }
-
-          if(!props) {
-            return <div>Loading...</div>;
-          }
-
           return (
             <div>
-              Login: {props.user.login}, password: {props.user.password}
+              Hello world
             </div>
           )
         }}

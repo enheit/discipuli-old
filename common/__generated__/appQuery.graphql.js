@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 011895c05c123383c10ed4441f144684
+ * @relayHash 65c8bbede0b459526e618829b05164b3
  */
 
 /* eslint-disable */
@@ -10,9 +10,9 @@
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
 export type appQueryResponse = {|
-  +user: ?{|
-    +login: string;
-    +password: string;
+  +person: ?{|
+    +firstName: string;
+    +lastName: ?string;
   |};
 |};
 */
@@ -20,9 +20,9 @@ export type appQueryResponse = {|
 
 /*
 query appQuery {
-  user: userByRowId(rowId: 1) {
-    login
-    password
+  person(id: 1) {
+    firstName
+    lastName
     id
   }
 }
@@ -37,35 +37,35 @@ const batch /*: ConcreteBatch*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": "user",
+        "alias": null,
         "args": [
           {
             "kind": "Literal",
-            "name": "rowId",
+            "name": "id",
             "value": 1,
-            "type": "Int!"
+            "type": "ID!"
           }
         ],
-        "concreteType": "User",
-        "name": "userByRowId",
+        "concreteType": "Person",
+        "name": "person",
         "plural": false,
         "selections": [
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "login",
+            "name": "firstName",
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "password",
+            "name": "lastName",
             "storageKey": null
           }
         ],
-        "storageKey": "userByRowId{\"rowId\":1}"
+        "storageKey": "person{\"id\":1}"
       }
     ],
     "type": "Query"
@@ -82,31 +82,31 @@ const batch /*: ConcreteBatch*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": "user",
+        "alias": null,
         "args": [
           {
             "kind": "Literal",
-            "name": "rowId",
+            "name": "id",
             "value": 1,
-            "type": "Int!"
+            "type": "ID!"
           }
         ],
-        "concreteType": "User",
-        "name": "userByRowId",
+        "concreteType": "Person",
+        "name": "person",
         "plural": false,
         "selections": [
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "login",
+            "name": "firstName",
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
             "args": null,
-            "name": "password",
+            "name": "lastName",
             "storageKey": null
           },
           {
@@ -117,11 +117,11 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           }
         ],
-        "storageKey": "userByRowId{\"rowId\":1}"
+        "storageKey": "person{\"id\":1}"
       }
     ]
   },
-  "text": "query appQuery {\n  user: userByRowId(rowId: 1) {\n    login\n    password\n    id\n  }\n}\n"
+  "text": "query appQuery {\n  person(id: 1) {\n    firstName\n    lastName\n    id\n  }\n}\n"
 };
 
 module.exports = batch;

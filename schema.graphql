@@ -1,0 +1,942 @@
+# All input for the `authenticate` mutation.
+input AuthenticateInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  email: String!
+  password: String!
+}
+
+# The output of our `authenticate` mutation.
+type AuthenticatePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+  jwtToken: JwtToken
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+}
+
+type Course implements Node {
+  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  id: ID!
+  rowId: Int!
+  title: String!
+}
+
+# A condition to be used against `Course` object types. All fields are tested for equality and combined with a logical ‘and.’
+input CourseCondition {
+  # Checks for equality with the object’s `rowId` field.
+  rowId: Int
+
+  # Checks for equality with the object’s `title` field.
+  title: String
+}
+
+# An input for mutations affecting `Course`
+input CourseInput {
+  rowId: Int
+  title: String!
+}
+
+# Represents an update to a `Course`. Fields that are set will be updated.
+input CoursePatch {
+  rowId: Int
+  title: String
+}
+
+# A connection to a list of `Course` values.
+type CoursesConnection {
+  # A list of `Course` objects.
+  nodes: [Course]!
+
+  # A list of edges which contains the `Course` and cursor to aid in pagination.
+  edges: [CoursesEdge!]!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # The count of *all* `Course` you could get from the connection.
+  totalCount: Int
+}
+
+# A `Course` edge in the connection.
+type CoursesEdge {
+  # A cursor for use in pagination.
+  cursor: Cursor
+
+  # The `Course` at the end of the edge.
+  node: Course!
+}
+
+# Methods to use when ordering `Course`.
+enum CoursesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  TITLE_ASC
+  TITLE_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+# All input for the create `Course` mutation.
+input CreateCourseInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The `Course` to be created by this mutation.
+  course: CourseInput!
+}
+
+# The output of our create `Course` mutation.
+type CreateCoursePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Course` that was created by this mutation.
+  course: Course
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  courseEdge(
+    # The method to use when ordering `Course`.
+    orderBy: [CoursesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoursesEdge
+}
+
+# All input for the create `Person` mutation.
+input CreatePersonInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The `Person` to be created by this mutation.
+  person: PersonInput!
+}
+
+# The output of our create `Person` mutation.
+type CreatePersonPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Person` that was created by this mutation.
+  person: Person
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # Reads a single `Role` that is related to this `Person`.
+  roleByRoleid: Role
+
+  # An edge for the type. May be used by Relay 1.
+  personEdge(
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PeopleEdge
+}
+
+# All input for the create `Role` mutation.
+input CreateRoleInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The `Role` to be created by this mutation.
+  role: RoleInput!
+}
+
+# The output of our create `Role` mutation.
+type CreateRolePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Role` that was created by this mutation.
+  role: Role
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  roleEdge(
+    # The method to use when ordering `Role`.
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}
+
+# A location in a connection that can be used for resuming pagination.
+scalar Cursor
+
+# A point in time as described by the [ISO
+# 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+scalar Datetime
+
+# All input for the `deleteCourseByRowId` mutation.
+input DeleteCourseByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  rowId: Int!
+}
+
+# All input for the `deleteCourse` mutation.
+input DeleteCourseInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Course` to be deleted.
+  id: ID!
+}
+
+# The output of our delete `Course` mutation.
+type DeleteCoursePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Course` that was deleted by this mutation.
+  course: Course
+  deletedCourseId: ID
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  courseEdge(
+    # The method to use when ordering `Course`.
+    orderBy: [CoursesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoursesEdge
+}
+
+# All input for the `deletePersonByRowId` mutation.
+input DeletePersonByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  rowId: Int!
+}
+
+# All input for the `deletePerson` mutation.
+input DeletePersonInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Person` to be deleted.
+  id: ID!
+}
+
+# The output of our delete `Person` mutation.
+type DeletePersonPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Person` that was deleted by this mutation.
+  person: Person
+  deletedPersonId: ID
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # Reads a single `Role` that is related to this `Person`.
+  roleByRoleid: Role
+
+  # An edge for the type. May be used by Relay 1.
+  personEdge(
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PeopleEdge
+}
+
+# All input for the `deleteRoleByRowId` mutation.
+input DeleteRoleByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  rowId: Int!
+}
+
+# All input for the `deleteRole` mutation.
+input DeleteRoleInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Role` to be deleted.
+  id: ID!
+}
+
+# The output of our delete `Role` mutation.
+type DeleteRolePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Role` that was deleted by this mutation.
+  role: Role
+  deletedRoleId: ID
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  roleEdge(
+    # The method to use when ordering `Role`.
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}
+
+# All input for the `genRandomBytes` mutation.
+input GenRandomBytesInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  arg0: Int!
+}
+
+# The output of our `genRandomBytes` mutation.
+type GenRandomBytesPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+  string: String
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+}
+
+# All input for the `genRandomUuid` mutation.
+input GenRandomUuidInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+}
+
+# The output of our `genRandomUuid` mutation.
+type GenRandomUuidPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+  uuid: UUID
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+}
+
+# A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
+# which securely represents claims between two parties.
+scalar JwtToken
+
+# The root mutation type which contains root level fields which mutate data.
+type Mutation {
+  # Creates a single `Course`.
+  createCourse(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: CreateCourseInput!
+  ): CreateCoursePayload
+
+  # Creates a single `Person`.
+  createPerson(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: CreatePersonInput!
+  ): CreatePersonPayload
+
+  # Creates a single `Role`.
+  createRole(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: CreateRoleInput!
+  ): CreateRolePayload
+
+  # Updates a single `Course` using its globally unique id and a patch.
+  updateCourse(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdateCourseInput!
+  ): UpdateCoursePayload
+
+  # Updates a single `Course` using a unique key and a patch.
+  updateCourseByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdateCourseByRowIdInput!
+  ): UpdateCoursePayload
+
+  # Updates a single `Person` using its globally unique id and a patch.
+  updatePerson(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdatePersonInput!
+  ): UpdatePersonPayload
+
+  # Updates a single `Person` using a unique key and a patch.
+  updatePersonByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdatePersonByRowIdInput!
+  ): UpdatePersonPayload
+
+  # Updates a single `Role` using its globally unique id and a patch.
+  updateRole(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdateRoleInput!
+  ): UpdateRolePayload
+
+  # Updates a single `Role` using a unique key and a patch.
+  updateRoleByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: UpdateRoleByRowIdInput!
+  ): UpdateRolePayload
+
+  # Deletes a single `Course` using its globally unique id.
+  deleteCourse(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeleteCourseInput!
+  ): DeleteCoursePayload
+
+  # Deletes a single `Course` using a unique key.
+  deleteCourseByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeleteCourseByRowIdInput!
+  ): DeleteCoursePayload
+
+  # Deletes a single `Person` using its globally unique id.
+  deletePerson(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeletePersonInput!
+  ): DeletePersonPayload
+
+  # Deletes a single `Person` using a unique key.
+  deletePersonByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeletePersonByRowIdInput!
+  ): DeletePersonPayload
+
+  # Deletes a single `Role` using its globally unique id.
+  deleteRole(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeleteRoleInput!
+  ): DeleteRolePayload
+
+  # Deletes a single `Role` using a unique key.
+  deleteRoleByRowId(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: DeleteRoleByRowIdInput!
+  ): DeleteRolePayload
+  authenticate(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: AuthenticateInput!
+  ): AuthenticatePayload
+  genRandomBytes(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: GenRandomBytesInput!
+  ): GenRandomBytesPayload
+  genRandomUuid(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: GenRandomUuidInput!
+  ): GenRandomUuidPayload
+  registerPerson(
+    # The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    input: RegisterPersonInput!
+  ): RegisterPersonPayload
+}
+
+# An object with a globally unique `ID`.
+interface Node {
+  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: Cursor
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: Cursor
+}
+
+# A connection to a list of `Person` values.
+type PeopleConnection {
+  # A list of `Person` objects.
+  nodes: [Person]!
+
+  # A list of edges which contains the `Person` and cursor to aid in pagination.
+  edges: [PeopleEdge!]!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # The count of *all* `Person` you could get from the connection.
+  totalCount: Int
+}
+
+# A `Person` edge in the connection.
+type PeopleEdge {
+  # A cursor for use in pagination.
+  cursor: Cursor
+
+  # The `Person` at the end of the edge.
+  node: Person!
+}
+
+# Methods to use when ordering `Person`.
+enum PeopleOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  FIRST_NAME_ASC
+  FIRST_NAME_DESC
+  LAST_NAME_ASC
+  LAST_NAME_DESC
+  ABOUT_ASC
+  ABOUT_DESC
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  ROLEID_ASC
+  ROLEID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type Person implements Node {
+  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  id: ID!
+  rowId: Int!
+  firstName: String!
+  lastName: String
+  about: String
+  createdAt: Datetime
+  roleid: Int
+
+  # Reads a single `Role` that is related to this `Person`.
+  roleByRoleid: Role
+}
+
+# A condition to be used against `Person` object types. All fields are tested for equality and combined with a logical ‘and.’
+input PersonCondition {
+  # Checks for equality with the object’s `rowId` field.
+  rowId: Int
+
+  # Checks for equality with the object’s `firstName` field.
+  firstName: String
+
+  # Checks for equality with the object’s `lastName` field.
+  lastName: String
+
+  # Checks for equality with the object’s `about` field.
+  about: String
+
+  # Checks for equality with the object’s `createdAt` field.
+  createdAt: Datetime
+
+  # Checks for equality with the object’s `roleid` field.
+  roleid: Int
+}
+
+# An input for mutations affecting `Person`
+input PersonInput {
+  rowId: Int
+  firstName: String!
+  lastName: String
+  about: String
+  createdAt: Datetime
+  roleid: Int
+}
+
+# Represents an update to a `Person`. Fields that are set will be updated.
+input PersonPatch {
+  rowId: Int
+  firstName: String
+  lastName: String
+  about: String
+  createdAt: Datetime
+  roleid: Int
+}
+
+# The root query type which gives access points into the data universe.
+type Query implements Node {
+  # Exposes the root query type nested one level down. This is helpful for Relay 1
+  # which can only query top level fields if they are in a particular form.
+  query: Query!
+
+  # The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  id: ID!
+
+  # Fetches an object given its globally unique `ID`.
+  node(
+    # The globally unique `ID`.
+    id: ID!
+  ): Node
+
+  # Reads and enables pagination through a set of `Course`.
+  allCourses(
+    # Only read the first `n` values of the set.
+    first: Int
+
+    # Only read the last `n` values of the set.
+    last: Int
+
+    # Skip the first `n` values from our `after` cursor, an alternative to cursor
+    # based pagination. May not be used with `last`.
+    offset: Int
+
+    # Read all values in the set before (above) this cursor.
+    before: Cursor
+
+    # Read all values in the set after (below) this cursor.
+    after: Cursor
+
+    # The method to use when ordering `Course`.
+    orderBy: [CoursesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    # A condition to be used in determining which values should be returned by the collection.
+    condition: CourseCondition
+  ): CoursesConnection
+
+  # Reads and enables pagination through a set of `Person`.
+  allPeople(
+    # Only read the first `n` values of the set.
+    first: Int
+
+    # Only read the last `n` values of the set.
+    last: Int
+
+    # Skip the first `n` values from our `after` cursor, an alternative to cursor
+    # based pagination. May not be used with `last`.
+    offset: Int
+
+    # Read all values in the set before (above) this cursor.
+    before: Cursor
+
+    # Read all values in the set after (below) this cursor.
+    after: Cursor
+
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+
+    # A condition to be used in determining which values should be returned by the collection.
+    condition: PersonCondition
+  ): PeopleConnection
+
+  # Reads and enables pagination through a set of `Role`.
+  allRoles(
+    # Only read the first `n` values of the set.
+    first: Int
+
+    # Only read the last `n` values of the set.
+    last: Int
+
+    # Skip the first `n` values from our `after` cursor, an alternative to cursor
+    # based pagination. May not be used with `last`.
+    offset: Int
+
+    # Read all values in the set before (above) this cursor.
+    before: Cursor
+
+    # Read all values in the set after (below) this cursor.
+    after: Cursor
+
+    # The method to use when ordering `Role`.
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    # A condition to be used in determining which values should be returned by the collection.
+    condition: RoleCondition
+  ): RolesConnection
+  courseByRowId(rowId: Int!): Course
+  personByRowId(rowId: Int!): Person
+  roleByRowId(rowId: Int!): Role
+  crypt(arg0: String!, arg1: String!): String
+  currentPerson: Person
+  currentUserId: Int
+  dearmor(arg0: String!): String
+  decrypt(arg0: String!, arg1: String!, arg2: String!): String
+  decryptIv(arg0: String!, arg1: String!, arg2: String!, arg3: String!): String
+  encrypt(arg0: String!, arg1: String!, arg2: String!): String
+  encryptIv(arg0: String!, arg1: String!, arg2: String!, arg3: String!): String
+  pgpKeyId(arg0: String!): String
+
+  # Reads a single `Course` using its globally unique `ID`.
+  course(
+    # The globally unique `ID` to be used in selecting a single `Course`.
+    id: ID!
+  ): Course
+
+  # Reads a single `Person` using its globally unique `ID`.
+  person(
+    # The globally unique `ID` to be used in selecting a single `Person`.
+    id: ID!
+  ): Person
+
+  # Reads a single `Role` using its globally unique `ID`.
+  role(
+    # The globally unique `ID` to be used in selecting a single `Role`.
+    id: ID!
+  ): Role
+}
+
+# All input for the `registerPerson` mutation.
+input RegisterPersonInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  roleid: Int!
+}
+
+# The output of our `registerPerson` mutation.
+type RegisterPersonPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+  person: Person
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # Reads a single `Role` that is related to this `Person`.
+  roleByRoleid: Role
+
+  # An edge for the type. May be used by Relay 1.
+  personEdge(
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PeopleEdge
+}
+
+type Role implements Node {
+  # A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  id: ID!
+  rowId: Int!
+  role: String
+
+  # Reads and enables pagination through a set of `Person`.
+  peopleByRoleid(
+    # Only read the first `n` values of the set.
+    first: Int
+
+    # Only read the last `n` values of the set.
+    last: Int
+
+    # Skip the first `n` values from our `after` cursor, an alternative to cursor
+    # based pagination. May not be used with `last`.
+    offset: Int
+
+    # Read all values in the set before (above) this cursor.
+    before: Cursor
+
+    # Read all values in the set after (below) this cursor.
+    after: Cursor
+
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+
+    # A condition to be used in determining which values should be returned by the collection.
+    condition: PersonCondition
+  ): PeopleConnection!
+}
+
+# A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’
+input RoleCondition {
+  # Checks for equality with the object’s `rowId` field.
+  rowId: Int
+
+  # Checks for equality with the object’s `role` field.
+  role: String
+}
+
+# An input for mutations affecting `Role`
+input RoleInput {
+  rowId: Int!
+  role: String
+}
+
+# Represents an update to a `Role`. Fields that are set will be updated.
+input RolePatch {
+  rowId: Int
+  role: String
+}
+
+# A connection to a list of `Role` values.
+type RolesConnection {
+  # A list of `Role` objects.
+  nodes: [Role]!
+
+  # A list of edges which contains the `Role` and cursor to aid in pagination.
+  edges: [RolesEdge!]!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # The count of *all* `Role` you could get from the connection.
+  totalCount: Int
+}
+
+# A `Role` edge in the connection.
+type RolesEdge {
+  # A cursor for use in pagination.
+  cursor: Cursor
+
+  # The `Role` at the end of the edge.
+  node: Role!
+}
+
+# Methods to use when ordering `Role`.
+enum RolesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  ROLE_ASC
+  ROLE_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+# All input for the `updateCourseByRowId` mutation.
+input UpdateCourseByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # An object where the defined keys will be set on the `Course` being updated.
+  coursePatch: CoursePatch!
+  rowId: Int!
+}
+
+# All input for the `updateCourse` mutation.
+input UpdateCourseInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Course` to be updated.
+  id: ID!
+
+  # An object where the defined keys will be set on the `Course` being updated.
+  coursePatch: CoursePatch!
+}
+
+# The output of our update `Course` mutation.
+type UpdateCoursePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Course` that was updated by this mutation.
+  course: Course
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  courseEdge(
+    # The method to use when ordering `Course`.
+    orderBy: [CoursesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CoursesEdge
+}
+
+# All input for the `updatePersonByRowId` mutation.
+input UpdatePersonByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # An object where the defined keys will be set on the `Person` being updated.
+  personPatch: PersonPatch!
+  rowId: Int!
+}
+
+# All input for the `updatePerson` mutation.
+input UpdatePersonInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Person` to be updated.
+  id: ID!
+
+  # An object where the defined keys will be set on the `Person` being updated.
+  personPatch: PersonPatch!
+}
+
+# The output of our update `Person` mutation.
+type UpdatePersonPayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Person` that was updated by this mutation.
+  person: Person
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # Reads a single `Role` that is related to this `Person`.
+  roleByRoleid: Role
+
+  # An edge for the type. May be used by Relay 1.
+  personEdge(
+    # The method to use when ordering `Person`.
+    orderBy: [PeopleOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PeopleEdge
+}
+
+# All input for the `updateRoleByRowId` mutation.
+input UpdateRoleByRowIdInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # An object where the defined keys will be set on the `Role` being updated.
+  rolePatch: RolePatch!
+  rowId: Int!
+}
+
+# All input for the `updateRole` mutation.
+input UpdateRoleInput {
+  # An arbitrary string value with no semantic meaning. Will be included in the
+  # payload verbatim. May be used to track mutations by the client.
+  clientMutationId: String
+
+  # The globally unique `ID` which will identify a single `Role` to be updated.
+  id: ID!
+
+  # An object where the defined keys will be set on the `Role` being updated.
+  rolePatch: RolePatch!
+}
+
+# The output of our update `Role` mutation.
+type UpdateRolePayload {
+  # The exact same `clientMutationId` that was provided in the mutation input,
+  # unchanged and unused. May be used by a client to track mutations.
+  clientMutationId: String
+
+  # The `Role` that was updated by this mutation.
+  role: Role
+
+  # Our root query field type. Allows us to run any query from our mutation payload.
+  query: Query
+
+  # An edge for the type. May be used by Relay 1.
+  roleEdge(
+    # The method to use when ordering `Role`.
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}
+
+# A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+scalar UUID
+

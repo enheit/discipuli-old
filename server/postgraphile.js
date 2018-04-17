@@ -2,23 +2,17 @@ import postgraphile from 'postgraphile';
 
 import { DB_CONNECTION_STRING, IS_PRODUCTION } from './config';
 
-// Connection path
-const connectionString = DB_CONNECTION_STRING;
-
-let options = {
+const options = {
   classicIds: true,
   graphqlRoute: '/graphql',
+  graphiqlRoute: '/graphiql',
+  graphiql: !IS_PRODUCTION,
+  jwtSecret: '123',
+  jwtPgTypeIdentifier: 'discipuli.jwt_token',
+  pgDefaultRole: 'anonymous',
 };
 
-// Add /graphiql end-point only to DEV build
-if (!IS_PRODUCTION) {
-  options = {
-    ...options,
-    graphiql: true,
-    graphiqlRoute: '/graphiql',
-  };
-}
-
-const postGqlMiddleware = postgraphile(connectionString, 'discipuli', options);
+// eslint-disable-next-line
+const postGqlMiddleware = postgraphile(DB_CONNECTION_STRING, 'discipuli', options);
 
 export default postGqlMiddleware;
