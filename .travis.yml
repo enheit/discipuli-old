@@ -1,21 +1,21 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 cache:
   directories:
-    - node_modules
+  - node_modules
 install:
-  - npm install
+- npm install
 script:
-  - npm run client.lint
-  - npm run common.lint
-  - npm run server.lint
-  - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-  - npm run server.prod
-  - npm run browser.prod
+- npm run client.lint
+- npm run common.lint
+- npm run server.lint
+- jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+- npm run server.prod
+- npm run browser.prod
 deploy:
   provider: heroku
   api_key:
-    secure: 5CsxK36dOCuEO9JM/H6M68415gLVrFjsFZPMT4k9DahbCakXNfNYk3259PTyuH66y3M11PeA5TGbY2RGAGDHZaHIHn5Htjhpi0w+iMLliTcBih2kymmBWXdTfw9KFsiZ/Uic7MTUdGwn1sYxslxWzStqnk+IlhTEPQM4DN+a8cZEScU5DPbf8uVdEWb5AiTsF2hQZpvPFp754YRPLKPTWvKK02Iu5i6HIg6Y8Pj/h+TMpXFmzENQ/Zd8iGtpBc4TBpKFiQ5Q28xCDGcM78Cd/LkNgUBa6uqghCSuRvsPfRdbzt/+7s4tycY8t6gLRVijFJakOn125A2qWip2ICnCwn5Dc0qXIcaaWnrx6kwPd9CO3ZCL9UQiFkIUEKh+YaZYjIqUvw8Fw2ieeq6txf0vC4L3nhRIazVUqjNcoTaDAL28gk9S4lpq2khjBgHJxnc6/RIBOTrEgGnKHuBc5tm1sEZ9ZDFKr0JtdBW4+scjQFynrQ+DDwPK2mtaqvgE8hjM/ivrFpj21Wuyq1sn0ryrqxS0p4xxuSpb/GX9xgoCWOplFQMsmIsgT+0LEP2FHfAA4I/G/w3Qx0Osp3ncqc+0N/wcdFXd0AQBKNUJO4ulox9vsTIrqA1+B52kZps/5kXODpVwDmEfjDuxQ13pquv9X1fdTiFQWjL9hlmsRAm8K7Y=
+    secure: E7Ln8jJpOTLHf/ViW0JODperda1XPJFsqloPOnrPwA0oD3Qm7N3Dlzc4vGmK8QHAWAc+WAUr2Nc6o9PKyM4Wbq7gOxSBIB1oOR1g2psO9hywHS5zrT6fkQS+vTD6q6RD5ZIu9+oAo5CfxFKFObafWJncdExP0IQVw5+y8NaYoiM2uPzuq25NGWVCIUFIcfhMXO+sATMq/MqsCqwuYrv52e12Ein5fpaOAHoqWsGpGsVfg6XUq9wSjZKkX7WACbkkqOyA+Wup58TOgYgCTwCzHitPtwp/YUVu9TAJsJ6kr4Sao4q4JD/wdnzEBQ+6d96SIdJLCusLyxO15nsIOr5o8jDV+qJs8qCHyuRi1I72RQ7Bx0UHzCsjlL1X2ximF/yuDtEbyBaWkb065YUXCzp1K8oQNj4wvY4MkcHx1docidysR8+a08F4q/ts0CeDyoWgF7WcRGUilBkUx0Wh1Dw9vjz3/G4PJFxyRIWMvOBiCVpzD+ySKH6AgaF9Fl9rRBKqviY7zZgezF60nped7ZTO2NOkN+Ob0LiBiKqP4ZgqDPpWnBQThmFVGHgmedEYvExsmKA2bwek5LpsCi9eYV6SYQQreGeaaA3Kar1WR03a8U1yIm8cdMiwB6kyrVc9avevnjdbmBzrvmctQZSiBfkD1P8Mxhm5G0E95mLEcHWH0+c=
   app:
     develop: discipuli-staging
